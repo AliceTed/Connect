@@ -19,6 +19,8 @@ public:
 private:
 	virtual void start() override
 	{
+		//AI端さコンポジットパターンで探査させてみたら？
+
 		m_renderer->initialize();
 		LightDesc light;
 		light.ambient = Color4(0.5f, 0.5f, 0.5f, 1.0f);//Color4(1.0f, 1.0f,1.0f, 1.0f);

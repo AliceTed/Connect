@@ -14,10 +14,11 @@ void GamePlay::initialize()
 	
 	//m_palyControl->addEasyAI(CONTROLLER_ID::ONE);
 	//m_palyControl->addEasyAI(CONTROLLER_ID::TWO);
-	//m_palyControl->addEasyAI(CONTROLLER_ID::TREE);
+	//
 	m_palyControl->addNormalAI(CONTROLLER_ID::ONE);
-	m_palyControl->addHardAI(CONTROLLER_ID::TWO);
-	//m_palyControl->addNormalAI(CONTROLLER_ID::TWO);
+	m_palyControl->addNormalAI(CONTROLLER_ID::TWO);
+	m_palyControl->addEasyAI(CONTROLLER_ID::TREE);
+	//m_palyControl->addHardAI(CONTROLLER_ID::TWO);
 	//m_palyControl->addNormalAI(CONTROLLER_ID::TREE);
 	
 	//m_palyControl->addPlayer(CONTROLLER_ID::ONE);
