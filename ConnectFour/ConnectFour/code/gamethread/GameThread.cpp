@@ -10,6 +10,7 @@ void GameThread::run()
 		update(60.0f /m_fps);
 		draw();
 		wait();
+		//sleep(0);
 	}
 	//I—¹ˆ—
 	end();
@@ -19,8 +20,9 @@ GameThread::GameThread(IRenderer * _device, float _fps)
 	:m_device(_device),
 	m_fps(_fps),
 	m_frameTime(1.0f/ _fps),
-	m_previosTime()
+	m_previosTime(0)
 {
+	m_previosTime = getTime();
 }
 
 IRenderer * GameThread::device() const
