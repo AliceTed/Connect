@@ -16,7 +16,7 @@ public:
 		m_renderer(),
 		m_gameTread(nullptr)
 	{
-		
+		//hogehoge
 	}
 private:
 	virtual void start() override
