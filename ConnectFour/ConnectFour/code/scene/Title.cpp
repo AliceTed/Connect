@@ -2,8 +2,8 @@
 #include "../play/PlayControl.h"
 #include "../device/Input.h"
 #include "../renderer/IRenderer.h"
-#include "../renderer/define/StringRenderDesc.h"
-#include "../renderer/define/SpriteRenderDesc.h"
+#include "../renderer/desc/StringRenderDesc.h"
+#include "../renderer/desc/SpriteRenderDesc.h"
 #include "../id/TEXTURE_ID.h"
 Title::Title()
 	:m_palyControl(nullptr),
@@ -48,16 +48,16 @@ void Title::draw(IRenderer * renderer)
 		m_toggle *= -1;
 	}
 	desc.color.a += m_toggle;
-	renderer->render(desc);
+	renderer->draw(desc);
 
 	desc.position = GSvector2(220, 250);
 	desc.string = "Push Space Key";
-	renderer->render(desc);
+	renderer->draw(desc);
 
 	SpriteRenderDesc sprite;
 	sprite.textureID = static_cast<unsigned int>(TEXTURE_ID::TITLE_ROGO);
 	sprite.matrix.translate(GSvector3(50, 50, 0));
-	renderer->render(sprite);
+	renderer->draw(sprite);
 }
 
 void Title::finish()

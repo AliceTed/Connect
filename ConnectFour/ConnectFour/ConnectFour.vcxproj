@@ -36,6 +36,8 @@
     <ClInclude Include="code\data\DataManager.h" />
     <ClInclude Include="code\data\define\MeshLoadDesc.h" />
     <ClInclude Include="code\data\define\TextureLoadDesc.h" />
+    <ClInclude Include="code\gamethread\GameThread.h" />
+    <ClInclude Include="code\gamethread\MyGameThread.h" />
     <ClInclude Include="code\handler\AIHandler.h" />
     <ClInclude Include="code\handler\Hnadler.h" />
     <ClInclude Include="code\handler\InputHandler.h" />
@@ -58,35 +60,24 @@
     <ClInclude Include="code\play\piece\Piece.h" />
     <ClInclude Include="code\play\PlayControl.h" />
     <ClInclude Include="code\play\Rule.h" />
+    <ClInclude Include="code\renderer\BlendFunc.h" />
+    <ClInclude Include="code\renderer\command\ClearCommand.h" />
+    <ClInclude Include="code\renderer\command\IRenderCommand.h" />
+    <ClInclude Include="code\renderer\command\LookAtCommand.h" />
+    <ClInclude Include="code\renderer\command\MeshRenderCommand.h" />
+    <ClInclude Include="code\renderer\command\SpriteRenderCommand.h" />
+    <ClInclude Include="code\renderer\command\StringRenderCommand.h" />
+    <ClInclude Include="code\renderer\desc\LookAtDesc.h" />
+    <ClInclude Include="code\renderer\desc\MeshRenderDesc.h" />
+    <ClInclude Include="code\renderer\desc\SpriteRenderDesc.h" />
+    <ClInclude Include="code\renderer\desc\StringRenderDesc.h" />
+    <ClInclude Include="code\renderer\DisplayList.h" />
+    <ClInclude Include="code\renderer\IRenderer.h" />
+    <ClInclude Include="code\renderer\Renderer.h" />
+    <ClInclude Include="code\renderer\RendererUtil.h" />
     <ClInclude Include="code\replay\CommandReader.h" />
     <ClInclude Include="code\replay\CommandRecorder.h" />
     <ClInclude Include="code\replay\Record.h" />
-    <ClInclude Include="code\renderer\define\BasicShapeRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\BASICSHAPE_TYPE.h" />
-    <ClInclude Include="code\renderer\define\BillBoardRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\BillborardRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\BlendFunc.h" />
-    <ClInclude Include="code\renderer\define\Color4.h" />
-    <ClInclude Include="code\renderer\define\LightDesc.h" />
-    <ClInclude Include="code\renderer\define\Matrix4.h" />
-    <ClInclude Include="code\renderer\define\MeshDesc.h" />
-    <ClInclude Include="code\renderer\define\MeshRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\NumberSpriteRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\OctreeRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\Ray.h" />
-    <ClInclude Include="code\renderer\define\Rect.h" />
-    <ClInclude Include="code\renderer\define\RectangleRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\ResourceID.h" />
-    <ClInclude Include="code\renderer\define\SkyBoxRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\SpriteRectRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\SpriteRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\StringRenderDesc.h" />
-    <ClInclude Include="code\renderer\define\Type.h" />
-    <ClInclude Include="code\renderer\define\Vector2.h" />
-    <ClInclude Include="code\renderer\define\Vector3.h" />
-    <ClInclude Include="code\renderer\define\ViewportDesc.h" />
-    <ClInclude Include="code\renderer\IRenderer.h" />
-    <ClInclude Include="code\renderer\Renderer.h" />
     <ClInclude Include="code\scene\GamePlay.h" />
     <ClInclude Include="code\scene\IScene.h" />
     <ClInclude Include="code\scene\Load.h" />
@@ -121,6 +112,8 @@
     <ClCompile Include="code\control\ControllerManager.cpp" />
     <ClCompile Include="code\control\PlaceTarget.cpp" />
     <ClCompile Include="code\data\DataManager.cpp" />
+    <ClCompile Include="code\gamethread\GameThread.cpp" />
+    <ClCompile Include="code\gamethread\MyGameThread.cpp" />
     <ClCompile Include="code\handler\AIHandler.cpp" />
     <ClCompile Include="code\handler\Hnadler.cpp" />
     <ClCompile Include="code\handler\InputHandler.cpp" />
@@ -135,9 +128,16 @@
     <ClCompile Include="code\play\piece\Piece.cpp" />
     <ClCompile Include="code\play\PlayControl.cpp" />
     <ClCompile Include="code\play\Rule.cpp" />
+    <ClCompile Include="code\renderer\command\ClearCommand.cpp" />
+    <ClCompile Include="code\renderer\command\LookAtCommand.cpp" />
+    <ClCompile Include="code\renderer\command\MeshRenderCommand.cpp" />
+    <ClCompile Include="code\renderer\command\SpriteRenderCommand.cpp" />
+    <ClCompile Include="code\renderer\command\StringRenderCommand.cpp" />
+    <ClCompile Include="code\renderer\DisplayList.cpp" />
+    <ClCompile Include="code\renderer\Renderer.cpp" />
+    <ClCompile Include="code\renderer\RendererUtil.cpp" />
     <ClCompile Include="code\replay\CommandReader.cpp" />
     <ClCompile Include="code\replay\CommandRecorder.cpp" />
-    <ClCompile Include="code\renderer\Renderer.cpp" />
     <ClCompile Include="code\scene\GamePlay.cpp" />
     <ClCompile Include="code\scene\Load.cpp" />
     <ClCompile Include="code\scene\SceneManager.cpp" />
@@ -231,6 +231,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

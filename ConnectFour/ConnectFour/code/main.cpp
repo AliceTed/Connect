@@ -2,65 +2,60 @@
 #include <memory>
 #include "renderer\Renderer.h"
 #include "scene\SceneManager.h"
-#include "scene\Load.h"
-#include "scene\Title.h"
-#include "scene\GamePlay.h"
+
 #include "data\DataManager.h"
+#include "data\define\TextureLoadDesc.h"
+#include "data\define\MeshLoadDesc.h"
+
+#include "gamethread\MyGameThread.h"
 class MyGame : public gslib::Game
 {
 public:
 	MyGame()
 		:Game(800, 600),
-		m_renderer(std::make_unique<Renderer>()),
-		m_sceneManager(),
-		m_dataManager()
+		m_renderer(),
+		m_gameTread(nullptr)
 	{
 	}
 private:
 	virtual void start() override
 	{
+		DataManager::load(TextureLoadDesc(TEXTURE_ID::TITLE_ROGO, "title_rogo"));
+		DataManager::load(MeshLoadDesc(MESH_ID::SPHERE, "sphere"));
+
+		m_gameTread = std::make_unique<MyGameThread>(&m_renderer);
+		m_gameTread->start();
+
 		//AI端さコンポジットパターンで探査させてみたら？
 
-		m_renderer->initialize();
-		LightDesc light;
-		light.ambient = Color4(0.5f, 0.5f, 0.5f, 1.0f);//Color4(1.0f, 1.0f,1.0f, 1.0f);
-		light.diffuse = Color4(1.0f, 1.0f, 1.0f, 1.0f);
-		light.specular = Color4(1.0f, 1.0f, 1.0f, 1.0f);
-		light.position = Vector3(100.0f,100.0f,100.0f);
-
-		m_renderer->light(light);
-	
-
-		m_renderer->lookAt({ 0,0,5 }, { 0,0,0 }, { 0,1,0 });
-		Scene_Ptr load = std::make_shared<Load>(&m_dataManager);
-		Scene_Ptr title = std::make_shared<Title>();
-		Scene_Ptr gameplay = std::make_shared<GamePlay>();
-		m_sceneManager.add(SceneMode::LOAD, load);
-		m_sceneManager.add(SceneMode::TITLE,title);
-		m_sceneManager.add(SceneMode::GAMEPLAY,gameplay);
-		m_sceneManager.change(SceneMode::LOAD);		
+		//m_renderer->initialize();
+		//LightDesc light;
+		//light.ambient = Color4(0.5f, 0.5f, 0.5f, 1.0f);//Color4(1.0f, 1.0f,1.0f, 1.0f);
+		//light.diffuse = Color4(1.0f, 1.0f, 1.0f, 1.0f);
+		//light.specular = Color4(1.0f, 1.0f, 1.0f, 1.0f);
+		//light.position = Vector3(100.0f,100.0f,100.0f);
+		//m_renderer->light(light);
+		//m_renderer->lookAt({ 0,0,5 }, { 0,0,0 }, { 0,1,0 });
 	}
 
 	// 更新
 	virtual void update(float deltaTime) override
 	{
-		m_sceneManager.update(deltaTime);
+		// レンダリングを行う
+		m_renderer.render();
 	}
 	// 描画
 	virtual void draw() override
 	{
-		m_sceneManager.draw(m_renderer.get());
 	}
 	// 終了
 	virtual void end() override
 	{
-		m_dataManager.release();
+		DataManager::release();
 	}
 private:
-	using RenderPtr = std::unique_ptr<IRenderer>;
-	RenderPtr m_renderer;
-	SceneManager m_sceneManager;
-	DataManager m_dataManager;
+	Renderer m_renderer;
+	std::unique_ptr<MyGameThread>m_gameTread;
 };
 
 int main()

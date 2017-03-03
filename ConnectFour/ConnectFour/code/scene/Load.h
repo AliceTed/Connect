@@ -17,6 +17,6 @@ public:
 	virtual const bool isExit() const override;
 private:
 	bool m_isEnd;
-	DataManager* m_dataManager;
+	//DataManager* m_dataManager;
 	std::shared_ptr<LoadThread>m_loader;
 };

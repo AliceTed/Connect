@@ -15,6 +15,7 @@
 
 #include "../renderer/IRenderer.h"
 #include "../control/ControllerManager.h"
+#include "../renderer/desc/LookAtDesc.h"
 PlayControl::PlayControl()
 	:m_desk(std::make_shared<Desk>()),
 	m_manager(std::make_shared<ControllerManager>()),
@@ -45,7 +46,10 @@ void PlayControl::update(float deltaTime, bool _isStop)
 void PlayControl::draw(IRenderer * _renderer) const
 {
 	const float half = MAP_SIZE*PIECE_SIZE*0.5;
-	_renderer->lookAt({ half,half,20 }, { half,half,0 }, { 0,1,0 });
+	LookAtDesc lookat;
+	lookat.eye = { half,half,20 };
+	lookat.at = { half,half,0 };
+	_renderer->lookAt(lookat);
 	m_desk->draw(_renderer);
 	m_manager->draw(_renderer);
 }

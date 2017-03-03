@@ -6,7 +6,6 @@
 #include "../util/Math.h"
 #include "../play/desk/DeskDefine.h"
 #include "../renderer/IRenderer.h"
-#include "../renderer/define/BasicShapeRenderDesc.h"
 
 #include "../replay/CommandRecorder.h"
 #include "../play/piece/MovePiece.h"

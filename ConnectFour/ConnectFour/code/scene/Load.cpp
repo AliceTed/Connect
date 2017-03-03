@@ -4,7 +4,7 @@
 #include "../data/define\TextureLoadDesc.h"
 #include "../data/define\MeshLoadDesc.h"
 Load::Load(DataManager * _dataManager)
-	:m_dataManager(_dataManager),
+	:/*m_dataManager(_dataManager),*/
 	m_loader(nullptr),
 	m_isEnd(false)
 {
@@ -18,8 +18,8 @@ void Load::initialize()
 
 void Load::update(float deltaTime)
 {
-	m_dataManager->load(TextureLoadDesc(TEXTURE_ID::TITLE_ROGO, "title_rogo"));
-	m_dataManager->load(MeshLoadDesc(MESH_ID::SPHERE, "sphere"));
+	/*m_dataManager->load(TextureLoadDesc(TEXTURE_ID::TITLE_ROGO, "title_rogo"));
+	m_dataManager->load(MeshLoadDesc(MESH_ID::SPHERE, "sphere"));*/
 	m_isEnd = true;
 }
 

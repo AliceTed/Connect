@@ -16,11 +16,10 @@ class DataManager
 public:
 	DataManager()=default;
 	~DataManager()=default;
+	static void load(const TextureLoadDesc& _desc);
+	static void load(const MeshLoadDesc& _desc);
 
- 	void load(const TextureLoadDesc& _desc);
-	void load(const MeshLoadDesc& _desc);
-
-	void release();
+	static void release();
 protected:
 	/**
 	* @fn
@@ -31,7 +30,7 @@ protected:
 	template<class Func,class DataEnum> 
 	static void eachRelease(Func _func, DataEnum _size);
 private:
-	CriticalSection m_lock;
+	//CriticalSection m_lock;
 };
 
 template<class Func, class DataEnum>
