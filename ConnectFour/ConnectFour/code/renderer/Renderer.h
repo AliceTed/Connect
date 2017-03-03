@@ -1,63 +1,67 @@
 #pragma once
-#include "IRenderer.h"
-#include "../renderer/define/ViewportDesc.h"
-#include "../renderer/define/LightDesc.h"
-#include "../renderer/define/BlendFunc.h"
+/**
+* @file Renderer.h
+* @brief マルチスレッドレンダラー
+* @author 松尾裕也
+* @date 2016/3/2
+*/
+//ActiveObjectパターン
 
-class Renderer : public IRenderer
+#include "IRenderer.h"
+#include "DisplayList.h"
+#include "../thread/CriticalSection.h"
+
+class Renderer:public IRenderer
 {
 public:
 	Renderer();
-	virtual ~Renderer();
+	//描画開始
+	virtual void begin()override;
+	//描画終了
+	virtual void end()override;
+	//画面消去
+	virtual void clear(const GScolor& _color)override;
+	//カメラ
+	virtual void lookAt(const LookAtDesc& _desc)override;
+	//描画(コマンドの追加)
+	virtual void draw(const MeshRenderDesc& _desc)override;
+	//スプライト描画
+	virtual void draw(const SpriteRenderDesc& _desc)override;
+	//文字列描画
+	virtual void draw(const StringRenderDesc& _desc)override;
 
-	// IRenderer を介して継承されました
-	virtual void initialize() override;
-
-	virtual void viewport(const ViewportDesc & desc) override;
-
-	virtual void perspective(float fov, float aspect, float near, float far) override;
-
-	virtual void lookAt(const Vector3 & eye, const Vector3 & at, const Vector3 & up) override;
-
-	virtual const ViewportDesc & getViewPort() const override;
-
-	virtual const Matrix4 & getProjectionMatrix() const override;
-
-	virtual const Matrix4 & getViewMatrix() const override;
-
-	virtual const LightDesc& getLight()const override;
-
-	virtual void light(const LightDesc & desc) override;
-
-	virtual Ray caluclateRay(const Vector2 & screenPosition) override;
-
-	virtual void render(const MeshRenderDesc & desc) override;
-
-	virtual void render(const BillBoardRenderDesc & desc) override;
-
-	virtual void render(const SpriteRenderDesc & desc) override;
-
-	virtual void render(const SpriteRectRenderDesc& desc)override;
-
-	virtual void render(const NumberSpriteRenderDesc& desc)override;
-
-	virtual void render(const StringRenderDesc & desc) override;
-
-	virtual void render(const RectangleRenderDesc & desc) override;
-
-	virtual void render(const OctreeRenderDesc& desc) override;
-	//スカイボックス描画
-	virtual void render(const SkyBoxRenderDesc& desc)override;
-
-	virtual void render(const BasicShapeRenderDesc& desc)override;
+	//同期を取る
+	virtual void sync()override;
+	//ディスプレイリストの描画
+	void render();
 private:
-	void setBlendFunc(BlendFunc blendFunc);
-	void renderTexture(ResourceID id,const Color4& color);
-	void renderTexture(ResourceID id, const Rect& rect, const Rect& srcRect, const Color4& color);
+	//現在のディスプレイリストを取得
+	int currentDisplayList()const;
+	//レンダリングを行うディプレイリストを取得
+	int renderDisplayList()const;
+	//スワップ
+	void swapDisplayList();
+	//待機 (trueで待機)
+	void wait(const bool& _isWait)const;
 
-	Matrix4 mProjectionMatrix;
-	Matrix4 mViewMatrix;
-	ViewportDesc mViewport;
-	LightDesc mLight;
+	template<class Command,class Desc>
+	void drawTemplate(const Desc& _desc)
+	{
+		CommandPtr command = std::make_unique<Command>(_desc);
+		m_displayList[currentDisplayList()].add(command);
+	}
+private:
+	//ディスプレイ(ダブルバッファように２つ)
+	std::vector<DisplayList> m_displayList;
+	//DisplayList m_displayList[2];
+	//現在のディスプレイリスト
+	int m_currentDisplay;
+	//現在描画中か？
+	bool m_isRendering;
+	//コマンド設定中か？
+	bool m_isAddCommand;
+	//同期中か？
+	bool m_isSync;
+	//クリティカルセクション
+	CriticalSection m_lock;
 };
-

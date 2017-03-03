@@ -1,68 +1,33 @@
 #pragma once
-
-#include "../renderer/define/ResourceID.h"
-#include "../renderer/define/Type.h"
-#include <string>
-
-struct ViewportDesc;
-struct LightDesc;
+/**
+* @file IRenderer.h
+* @brief レンダラー用インターフェイス
+* @author 松尾裕也
+* @date 2016/3/3
+*/
+#include <gslib.h>
 struct MeshRenderDesc;
-struct BillBoardRenderDesc;
 struct SpriteRenderDesc;
-struct SpriteRectRenderDesc;
+struct LookAtDesc;
 struct StringRenderDesc;
-struct NumberSpriteRenderDesc;
-struct RectangleRenderDesc;
-struct OctreeRenderDesc;
-struct SkyBoxRenderDesc;
-struct BasicShapeRenderDesc;
-struct Ray;
-//レンダラインタフェース
 class IRenderer
 {
 public:
-	//仮想デストラクタ
-	virtual ~IRenderer() {};
-	//初期化
-	virtual void initialize() = 0;
-	//ビューポート設定
-	virtual void viewport(const ViewportDesc& desc) = 0;
-	//透視変換行列の設定
-	virtual void perspective(float fov, float aspect, float near, float far) = 0;
-	//視野変換行列の設定
-	virtual void lookAt(const Vector3& eye, const Vector3& at, const Vector3& up) = 0;
-	//ビューポートの設定
-	virtual const ViewportDesc& getViewPort() const = 0;
-	//透視変換行列の取得
-	virtual const Matrix4& getProjectionMatrix() const = 0;
-	//視野変換行列の取得
-	virtual const Matrix4& getViewMatrix()  const = 0;
-	//ライトの取得
-	virtual const LightDesc& getLight()const = 0;
-
-	//ライトの設定
-	virtual void light(const LightDesc& desc) = 0;
-	//レイの計算を行う
-	virtual Ray caluclateRay(const Vector2&screenPosition) = 0;
-	//メッシュの描画
-	virtual void render(const MeshRenderDesc& desc) = 0;
-	//ビルボードの描画
-	virtual void render(const BillBoardRenderDesc& desc) = 0;
+	virtual ~IRenderer() {}
+	virtual void begin() = 0;
+	//描画終了
+	virtual void end() = 0;
+	//画面消去
+	virtual void clear(const GScolor& _color) = 0;
+	//カメラ
+	virtual void lookAt(const LookAtDesc& _desc) = 0;
+	//描画(コマンドの追加)
+	virtual void draw(const MeshRenderDesc& _desc) = 0;
 	//スプライト描画
-	virtual void render(const SpriteRenderDesc& desc) = 0;
-	//切り取り用スプライト描画
-	virtual void render(const SpriteRectRenderDesc& desc) = 0;
-	//スプライトでの数字描画
-	virtual void render(const NumberSpriteRenderDesc& desc) = 0;
-	//文字列の描画
-	virtual void render(const StringRenderDesc& desc) = 0;
-	//矩形の描画
-	virtual void render(const RectangleRenderDesc& desc) = 0;
-	//オクツリー描画
-	virtual void render(const OctreeRenderDesc& desc) = 0;
-	//スカイボックス描画
-	virtual void render(const SkyBoxRenderDesc& desc) = 0;
-	//基本形状の描画
-	virtual void render(const BasicShapeRenderDesc& desc) = 0;
+	virtual void draw(const SpriteRenderDesc& _desc) = 0;
+	//文字列描画
+	virtual void draw(const StringRenderDesc& _desc) = 0;
 
+	//同期を取る
+	virtual void sync() = 0;
 };
