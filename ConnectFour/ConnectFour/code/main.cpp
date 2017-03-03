@@ -26,7 +26,7 @@ private:
 		m_gameTread = std::make_unique<MyGameThread>(&m_renderer);
 		m_gameTread->start();
 
-		//AI端さコンポジットパターンで探査させてみたら？
+		//AI探査をコンポジットパターンでやってみる？
 
 		//m_renderer->initialize();
 		//LightDesc light;

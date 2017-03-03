@@ -7,6 +7,7 @@
 * @date 2016/2/15
 */
 #include<gslib.h>
+#include <string>
 #include "../id/CastID.h"
 #include "../thread/CriticalSection.h"
 struct TextureLoadDesc;
@@ -20,7 +21,15 @@ public:
 	static void load(const MeshLoadDesc& _desc);
 
 	static void release();
-protected:
+private:
+	template<class Desc,class Loader>
+	static void load(const Desc& _desc, Loader _loader, const std::string& _errMes)
+	{
+		std::string name = _desc.m_path + _desc.m_name + _desc.m_extension;
+		if (_loader(CastID::id2uint(_desc.m_id), name.c_str()) == GS_TRUE)return;
+		Message::send(_errMes, name);
+	}
+
 	/**
 	* @fn
 	* @brief 指定関数でデータを開放
