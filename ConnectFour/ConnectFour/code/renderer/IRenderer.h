@@ -10,6 +10,7 @@ struct MeshRenderDesc;
 struct SpriteRenderDesc;
 struct LookAtDesc;
 struct StringRenderDesc;
+struct SphereShaderDesc;
 class IRenderer
 {
 public:
@@ -27,6 +28,8 @@ public:
 	virtual void draw(const SpriteRenderDesc& _desc) = 0;
 	//文字列描画
 	virtual void draw(const StringRenderDesc& _desc) = 0;
+	//スフィアシェーダ描画
+	virtual void draw(const SphereShaderDesc& _desc) = 0;
 
 	//同期を取る
 	virtual void sync() = 0;

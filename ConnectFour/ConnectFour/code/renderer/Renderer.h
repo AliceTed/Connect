@@ -30,6 +30,9 @@ public:
 	//文字列描画
 	virtual void draw(const StringRenderDesc& _desc)override;
 
+	//スフィアシェーダ描画
+	virtual void draw(const SphereShaderDesc & _desc) override;
+
 	//同期を取る
 	virtual void sync()override;
 	//ディスプレイリストの描画

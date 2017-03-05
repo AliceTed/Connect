@@ -5,6 +5,7 @@
 #include "command\ClearCommand.h"
 #include "command\SpriteRenderCommand.h"
 #include "command\StringRenderCommand.h"
+#include "command\SphereShaderCommand.h"
 Renderer::Renderer()
 	:m_currentDisplay(0),
 	m_isRendering(false),
@@ -53,6 +54,11 @@ void Renderer::draw(const SpriteRenderDesc & _desc)
 void Renderer::draw(const StringRenderDesc & _desc)
 {
 	drawTemplate<StringRenderCommand>(_desc);
+}
+
+void Renderer::draw(const SphereShaderDesc & _desc)
+{
+	drawTemplate<SphereShaderCommand>(_desc);
 }
 
 void Renderer::sync()

@@ -6,6 +6,7 @@
 #include "data\DataManager.h"
 #include "data\define\TextureLoadDesc.h"
 #include "data\define\MeshLoadDesc.h"
+#include "data\define\ShaderLoadDesc.h"
 
 #include "gamethread\MyGameThread.h"
 class MyGame : public gslib::Game
@@ -16,13 +17,17 @@ public:
 		m_renderer(),
 		m_gameTread(nullptr)
 	{
-		//hogehoge
 	}
 private:
 	virtual void start() override
 	{
 		DataManager::load(TextureLoadDesc(TEXTURE_ID::TITLE_ROGO, "title_rogo"));
-		DataManager::load(MeshLoadDesc(MESH_ID::SPHERE, "sphere"));
+		DataManager::load(TextureLoadDesc(TEXTURE_ID::ROCKWALL, "rockwall"));
+		DataManager::load(TextureLoadDesc(TEXTURE_ID::ROCKWALL_NORMAL, "rockwall_normal"));
+		
+		DataManager::load(MeshLoadDesc(MESH_ID::SPHERE, "sphere",true));
+
+		DataManager::load(ShaderLoadDesc(SHADER_ID::SPHERE, "sphere"));
 
 		m_gameTread = std::make_unique<MyGameThread>(&m_renderer);
 		m_gameTread->start();

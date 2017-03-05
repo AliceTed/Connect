@@ -10,5 +10,5 @@ enum class COLOR_ID:unsigned int
 	RED,
 	BLUE,
 	GREEN,
-	ACROMIA//ñ≥êF
+	WHITE
 };

@@ -8,6 +8,6 @@
 enum class TEXTURE_ID:unsigned int
 {
 	TITLE_ROGO,
-
-	SIZE
+	ROCKWALL,
+	ROCKWALL_NORMAL
 };

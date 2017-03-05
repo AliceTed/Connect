@@ -12,6 +12,7 @@
 #include "../thread/CriticalSection.h"
 struct TextureLoadDesc;
 struct MeshLoadDesc;
+struct ShaderLoadDesc;
 class DataManager
 {
 public:
@@ -19,13 +20,13 @@ public:
 	~DataManager()=default;
 	static void load(const TextureLoadDesc& _desc);
 	static void load(const MeshLoadDesc& _desc);
-
+	static void load(const ShaderLoadDesc& _desc);
 	static void release();
 private:
 	template<class Desc,class Loader>
 	static void load(const Desc& _desc, Loader _loader, const std::string& _errMes)
 	{
-		std::string name = _desc.m_path + _desc.m_name + _desc.m_extension;
+		std::string name = _desc.getName();
 		if (_loader(CastID::id2uint(_desc.m_id), name.c_str()) == GS_TRUE)return;
 		Message::send(_errMes, name);
 	}

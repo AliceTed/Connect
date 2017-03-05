@@ -1,7 +1,7 @@
 #include "Piece.h"
 #include "../../id/CastID.h"
 #include "../../renderer/IRenderer.h"
-#include "../../renderer/desc/MeshRenderDesc.h"
+#include "../../renderer/desc/SphereShaderDesc.h"
 #include "../../id/MESH_ID.h"
 #include "../desk/DeskDefine.h"
 Piece::Piece(const GSvector3& _position,COLOR_ID _id)
@@ -22,13 +22,14 @@ void Piece::update(float deltaTime)
 }
 void Piece::draw(IRenderer * _renderer, float _alpha) const
 {
-	MeshRenderDesc desc;
+	SphereShaderDesc desc;
 	float radius = PIECE_SIZE*0.5f;
 	desc.meshID = CastID::id2uint(MESH_ID::SPHERE);
 	desc.matrix.scale(GSvector3(radius, radius, radius));
 	desc.matrix.translate(m_position);
 	desc.color = CastID::colorID2Color(m_color);
 	desc.color.a = _alpha;
+	desc.light.position = m_position;
 	_renderer->draw(desc);
 }
 

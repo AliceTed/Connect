@@ -16,6 +16,11 @@ struct MeshLoadDesc
 		m_extension(".msh"),
 		m_isShader(_isShader)
 	{}
+	//˜AŒ‹
+	std::string getName()const
+	{
+		return m_path + m_name + m_extension;
+	}
 
 	MESH_ID m_id;
 	std::string m_name;

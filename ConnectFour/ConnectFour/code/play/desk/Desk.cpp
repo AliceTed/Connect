@@ -22,7 +22,7 @@ bool Desk::isFinish() const
 	{
 		for (const auto& y : x)
 		{
-			if (y->isSameType(COLOR_ID::ACROMIA))
+			if (y->isSameType(COLOR_ID::WHITE))
 			{
 				return false;
 			}
@@ -82,7 +82,7 @@ bool Desk::isFreeLocation(const IntVector2 & _location) const
 	if (ERR_LOCATION==_location)return false;
 	assert(MAP_SIZE > _location.x&&MAP_SIZE > _location.y);
 	assert(0 <= _location.x && 0 <= _location.y);
-	return m_conatainer[_location.x][_location.y]->isSameType(COLOR_ID::ACROMIA);
+	return m_conatainer[_location.x][_location.y]->isSameType(COLOR_ID::WHITE);
 }
 
 void Desk::reset()
@@ -120,7 +120,7 @@ void Desk::make_piece()
 		Column column;
 		for (unsigned n = 0; n < MAP_SIZE;n++)
 		{
-			PiecePtr piece = std::make_shared<Piece>(GSvector3(i*PIECE_SIZE, n*PIECE_SIZE, -0.2f),COLOR_ID::ACROMIA);
+			PiecePtr piece = std::make_shared<Piece>(GSvector3(i*PIECE_SIZE, n*PIECE_SIZE, -0.2f),COLOR_ID::WHITE);
 			column.emplace_back(piece);
 		}
 		m_conatainer.emplace_back(column);
