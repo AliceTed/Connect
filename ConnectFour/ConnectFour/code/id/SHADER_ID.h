@@ -7,5 +7,8 @@
 */
 enum class SHADER_ID:unsigned int
 {
-	SPHERE
+	SPHERE,
+	BRIGHT,
+	BLOOM_BLUR,
+	BLOOM
 };

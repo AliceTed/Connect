@@ -7,6 +7,10 @@ StringRenderCommand::StringRenderCommand(const StringRenderDesc & _desc)
 
 void StringRenderCommand::render()
 {
+	GScolor currentColor;
+	// カレントカラーを取得する
+	glGetFloatv(GL_CURRENT_COLOR, (float*)&currentColor);
+
 	//文字色の設定
 	glColor4fv((GLfloat*)&m_desc.color);
 
@@ -21,4 +25,7 @@ void StringRenderCommand::render()
 
 	//文字列の描画
 	gsDrawText(m_desc.string.c_str());
+
+	// カレントカラーを復帰する
+	glColor4fv((float*)&currentColor);
 }

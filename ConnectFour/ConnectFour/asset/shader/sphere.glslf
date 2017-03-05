@@ -17,6 +17,7 @@ uniform float gs_MaterialShininess;
 
 uniform sampler2D u_baseMap;
 uniform sampler2D u_normalMap;
+uniform sampler2D u_maskMap;
 uniform vec4 u_color;
 void main(void) 
 {
@@ -26,8 +27,10 @@ void main(void)
 	vec3 H = normalize(L + V);
 	float diffuse  = max(dot(N, L), 0);
 	float specular = pow(max(dot(N, H), 0), gs_MaterialShininess);
-	vec4 baseColor = texture2D(u_baseMap, out_TexCoord.xy)*u_color;
-	vec4 color = gs_MaterialAmbient  * u_lightAmbient  * baseColor
+	vec4 baseColor = texture2D(u_baseMap, out_TexCoord.xy);
+	vec4 emissive=texture2D(u_maskMap,out_TexCoord)*u_color;
+	vec4 color = emissive
+	           + gs_MaterialAmbient  * u_lightAmbient  * baseColor
 			   + gs_MaterialDiffuse  * u_lightDiffuse  * diffuse  * baseColor
 			   + gs_MaterialSpecular * u_lightSpecular * specular
 	           + gs_MaterialEmission * baseColor;

@@ -48,6 +48,7 @@
     <ClInclude Include="code\device\Input.h" />
     <ClInclude Include="code\id\COLOR_ID.h" />
     <ClInclude Include="code\id\MESH_ID.h" />
+    <ClInclude Include="code\id\RENDER_TARGET_ID.h" />
     <ClInclude Include="code\id\SHADER_ID.h" />
     <ClInclude Include="code\id\TEXTURE_ID.h" />
     <ClInclude Include="code\play\desk\Desk.h" />

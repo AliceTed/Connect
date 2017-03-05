@@ -270,6 +270,9 @@
     <ClInclude Include="code\renderer\desc\LightDesc.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="code\id\RENDER_TARGET_ID.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\scene\GamePlay.cpp">

@@ -28,15 +28,20 @@ void SphereShaderCommand::render()
 
 	gsSetShaderParamTexture("u_baseMap", 0);
 	gsSetShaderParamTexture("u_normalMap", 1);
+	gsSetShaderParamTexture("u_maskMap", 2);
 	glActiveTexture(GL_TEXTURE0);
 	gsBindTexture(CastID::id2uint(TEXTURE_ID::ROCKWALL));
 	glActiveTexture(GL_TEXTURE1);
 	gsBindTexture(CastID::id2uint(TEXTURE_ID::ROCKWALL_NORMAL));
+	glActiveTexture(GL_TEXTURE2);
+	gsBindTexture(CastID::id2uint(TEXTURE_ID::ROCKWALL_MASK));
 
 	gsSetShaderParam4f("u_color", &m_desc.color);
 	gsDrawMeshEx(m_desc.meshID);
 	gsEndShader();
 
+	gsUnbindTexture(CastID::id2uint(TEXTURE_ID::ROCKWALL_MASK));
+	glActiveTexture(GL_TEXTURE1);
 	gsUnbindTexture(CastID::id2uint(TEXTURE_ID::ROCKWALL_NORMAL));
 	glActiveTexture(GL_TEXTURE0);
 	gsUnbindTexture(CastID::id2uint(TEXTURE_ID::ROCKWALL));	
