@@ -9,8 +9,8 @@ void GameThread::run()
 	{
 		update(60.0f /m_fps);
 		draw();
-		wait();
-		//sleep(0);
+		//wait();
+		sleep(10);
 	}
 	//I—¹ˆ—
 	end();

@@ -16,7 +16,9 @@ public:
 	MyGame()
 		:Game(800, 600),
 		m_renderer(),
-		m_gameTread(nullptr)
+		m_gameTread(nullptr),
+		m_minBright(0.25f),
+		m_toneScale(0.8f)
 	{
 	}
 private:
@@ -39,6 +41,7 @@ private:
 		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BRIGHT),128,128, GS_TRUE, GS_TRUE, GS_FALSE);
 		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM_BLUR), 128, 128, GS_TRUE, GS_TRUE, GS_FALSE);
 		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM), 800, 600, GS_TRUE, GS_TRUE, GS_FALSE);
+		
 		m_gameTread = std::make_unique<MyGameThread>(&m_renderer);
 		m_gameTread->start();
 
@@ -75,7 +78,7 @@ private:
 		glActiveTexture(GL_TEXTURE0);
 		gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BASE), 0);
 		gsSetShaderParamTexture("u_sceneColor", 0);
-		gsSetShaderParam1f("u_minBright", 0.25f);
+		gsSetShaderParam1f("u_minBright", m_minBright);
 		gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
 		gsEndShader();
 		gsEndRenderTarget();
@@ -88,13 +91,15 @@ private:
 		glActiveTexture(GL_TEXTURE0);
 		gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BRIGHT), 0);
 		gsSetShaderParamTexture("u_sceneColor", 0);
-		gsSetShaderParam2f("u_direction", &GSvector2(1, 0));
+		gsSetShaderParam2f("u_direction", &GSvector2(1,0.0f));
 		gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
 		gsEndShader();
 		gsEndRenderTarget();
 
 		//デフォルトとブラーをかけたものを合成
 		gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM));
+		glClearColor(0, 0, 0, 1);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		gsBeginShader(CastID::id2uint(SHADER_ID::BLOOM));
 		glActiveTexture(GL_TEXTURE0);
 		gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BASE), 0);
@@ -102,7 +107,7 @@ private:
 		gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BLOOM_BLUR), 0);
 		gsSetShaderParamTexture("u_sceneColor", 0);
 		gsSetShaderParamTexture("u_bloomColor", 1);
-		gsSetShaderParam1f("u_toneScale", 0.8f);
+		gsSetShaderParam1f("u_toneScale", m_toneScale);
 		gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
 		gsEndShader();
 		gsEndRenderTarget();
@@ -129,6 +134,9 @@ private:
 private:
 	Renderer m_renderer;
 	std::unique_ptr<MyGameThread>m_gameTread;
+
+	float m_minBright;
+	float m_toneScale;
 };
 
 int main()
