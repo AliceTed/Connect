@@ -59,7 +59,7 @@ void PlayControl::draw(IRenderer * _renderer) const
 
 	SkyBoxRenderDesc skybox;
 	skybox.meshID = CastID::id2uint(MESH_ID::SKYDOME);
-	//skybox.time = m_time;
+	//skybox.time = -m_time;
 	_renderer->draw(skybox);
 
 	m_desk->draw(_renderer);

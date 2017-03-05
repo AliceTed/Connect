@@ -40,7 +40,6 @@ private:
 		DataManager::load(ShaderLoadDesc(SHADER_ID::BLOOM_BLUR, "defalt", "bloom_blur"));
 		DataManager::load(ShaderLoadDesc(SHADER_ID::BLOOM, "defalt", "bloom"));
 		DataManager::load(ShaderLoadDesc(SHADER_ID::SKYBOX, "defalt", "skybox"));
-		DataManager::load(ShaderLoadDesc(SHADER_ID::WAVE_TEXTURE, "texture", "wave_texture"));
 
 		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE), 800, 600, GS_TRUE, GS_TRUE, GS_FALSE);
 		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BRIGHT), 128, 128, GS_TRUE, GS_TRUE, GS_FALSE);
