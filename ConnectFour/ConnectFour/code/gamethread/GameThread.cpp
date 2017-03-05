@@ -9,8 +9,12 @@ void GameThread::run()
 	{
 		update(60.0f /m_fps);
 		draw();
+		//60FPS(‚¿‚ç‚Â‚«‚·‚²‚¢)
 		//wait();
+		//‘å‘Ì60FPS‚Æ“¯‚¶‚­‚ç‚¢
 		sleep(10);
+		//‚‘¬ƒ‚[ƒh
+		//sleep(0);
 	}
 	//I—¹ˆ—
 	end();

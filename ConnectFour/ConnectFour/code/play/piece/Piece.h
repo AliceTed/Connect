@@ -24,4 +24,6 @@ protected:
 	GSvector3 m_position;
 private:
 	COLOR_ID m_color;
+	float m_rotateY;
+	float m_rotSpeed;
 };
