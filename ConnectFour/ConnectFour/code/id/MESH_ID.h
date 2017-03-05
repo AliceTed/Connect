@@ -8,6 +8,6 @@
 enum class MESH_ID :unsigned int
 {
 	SPHERE,
-
+	SKYDOME,
 	SIZE
 };

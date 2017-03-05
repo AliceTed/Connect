@@ -30,6 +30,7 @@ private:
 		DataManager::load(TextureLoadDesc(TEXTURE_ID::ROCKWALL_MASK, "rockwall_mask"));
 		
 		DataManager::load(MeshLoadDesc(MESH_ID::SPHERE, "sphere",true));
+		DataManager::load(MeshLoadDesc(MESH_ID::SKYDOME, "skydome", true));
 		
 		//defalt.glslvはポストエフェクト用バーテックスシェーダー
 		DataManager::load(ShaderLoadDesc(SHADER_ID::SPHERE, "sphere"));
