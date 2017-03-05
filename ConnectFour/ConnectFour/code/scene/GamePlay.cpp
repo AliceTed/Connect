@@ -3,7 +3,8 @@
 #include "../device/Input.h"
 GamePlay::GamePlay()
 	:m_palyControl(nullptr),
-	m_isStop(false)
+	m_isStop(false),
+	m_record()
 {
 }
 
@@ -40,31 +41,19 @@ void GamePlay::draw(IRenderer * _renderer)
 {
 	m_palyControl->draw(_renderer);
 }
-#include<iostream> 
-#include<fstream>
+
 void GamePlay::finish()
 {
 	if (m_palyControl->isWin())
 	{
-		CONTROLLER_ID id = m_palyControl->getWinner();
-		if (winner.count(id) == 0)
-		{
-			winner.insert(std::make_pair(id,0));
-		}
-		winner[id] += 1;
+		m_record.addWinner(m_palyControl->getWinner());
 	}
-	std::ofstream ofs("play.txt");
-	int sum = 0;
-	for (const auto& i : winner)
+	if (m_palyControl->isFinish())
 	{
-		sum += i.second;
+		m_record.addDraw();
 	}
 
-	ofs << "合計:" <<sum << std::endl;
-	for (const auto& i : winner)
-	{
-		ofs <<"id:"<<static_cast<unsigned int>(i.first)<<",勝利数:"<<i.second << std::endl;
-	}
+	//デストラクタで記録しないのは試合中にゲームをやめた場合に記録されるのを防ぐため
 	m_palyControl->record();
 	m_palyControl.reset();
 	m_palyControl = nullptr;

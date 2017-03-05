@@ -18,7 +18,7 @@ void CommandRecorder::reset()
 
 void CommandRecorder::record(const std::string& _file)
 {
-	std::ofstream ofs("./asset/replay/"+_file+ ".csv");
+	std::ofstream ofs("./asset/record/"+_file+ ".csv");
 	for (const auto& i: m_container)
 	{
 		ofs << static_cast<unsigned int>(i.m_id) << "," << static_cast<unsigned int>(i.m_command) << std::endl;

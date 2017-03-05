@@ -62,6 +62,7 @@
     <ClInclude Include="code\play\piece\MOVING.h" />
     <ClInclude Include="code\play\piece\Piece.h" />
     <ClInclude Include="code\play\PlayControl.h" />
+    <ClInclude Include="code\play\PlayRecord.h" />
     <ClInclude Include="code\play\Rule.h" />
     <ClInclude Include="code\renderer\BlendFunc.h" />
     <ClInclude Include="code\renderer\command\ClearCommand.h" />
@@ -135,6 +136,7 @@
     <ClCompile Include="code\play\piece\MovePiece.cpp" />
     <ClCompile Include="code\play\piece\Piece.cpp" />
     <ClCompile Include="code\play\PlayControl.cpp" />
+    <ClCompile Include="code\play\PlayRecord.cpp" />
     <ClCompile Include="code\play\Rule.cpp" />
     <ClCompile Include="code\renderer\command\ClearCommand.cpp" />
     <ClCompile Include="code\renderer\command\LookAtCommand.cpp" />

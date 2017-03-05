@@ -1,8 +1,7 @@
 #pragma once
 #include <memory>
-#include <unordered_map>
 #include "IScene.h"
-#include "../id/CONTROLLER_ID.h"
+#include "../play/PlayRecord.h"
 class PlayControl;
 class GamePlay:public IScene
 {
@@ -19,6 +18,6 @@ public:
 private:
 	using PlayPtr = std::unique_ptr<PlayControl>;
 	PlayPtr m_palyControl;
-	std::unordered_map<CONTROLLER_ID,int> winner;
+	PlayRecord m_record;
 	bool m_isStop;
 };

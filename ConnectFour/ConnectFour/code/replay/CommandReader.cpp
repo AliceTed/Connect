@@ -41,7 +41,7 @@ void CommandReader::registration(const Record & _record)
 
 void CommandReader::read(const std::string & _file)
 {
-	std::ifstream ifs("./asset/replay/"+_file + ".csv");
+	std::ifstream ifs("./asset/record/"+_file + ".csv");
 	if (!ifs)return;
 	std::string line;
 	while (getline(ifs, line))

@@ -4,7 +4,7 @@
 * @file PlayControl.h
 * @brief Play‘S‘Ì‚ÌŠÇ—
 * @author ¼”ö—T–ç
-* @date 2016/2/‚P‚Q
+* @date 2016/2/12
 */
 #include <memory>
 #include "../play/Rule.h"
