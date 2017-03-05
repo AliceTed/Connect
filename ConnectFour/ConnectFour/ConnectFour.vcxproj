@@ -68,12 +68,14 @@
     <ClInclude Include="code\renderer\command\IRenderCommand.h" />
     <ClInclude Include="code\renderer\command\LookAtCommand.h" />
     <ClInclude Include="code\renderer\command\MeshRenderCommand.h" />
+    <ClInclude Include="code\renderer\command\SkyBoxRenderCommand.h" />
     <ClInclude Include="code\renderer\command\SphereShaderCommand.h" />
     <ClInclude Include="code\renderer\command\SpriteRenderCommand.h" />
     <ClInclude Include="code\renderer\command\StringRenderCommand.h" />
     <ClInclude Include="code\renderer\desc\LightDesc.h" />
     <ClInclude Include="code\renderer\desc\LookAtDesc.h" />
     <ClInclude Include="code\renderer\desc\MeshRenderDesc.h" />
+    <ClInclude Include="code\renderer\desc\SkyBoxRenderDesc.h" />
     <ClInclude Include="code\renderer\desc\SphereShaderDesc.h" />
     <ClInclude Include="code\renderer\desc\SpriteRenderDesc.h" />
     <ClInclude Include="code\renderer\desc\StringRenderDesc.h" />
@@ -137,6 +139,7 @@
     <ClCompile Include="code\renderer\command\ClearCommand.cpp" />
     <ClCompile Include="code\renderer\command\LookAtCommand.cpp" />
     <ClCompile Include="code\renderer\command\MeshRenderCommand.cpp" />
+    <ClCompile Include="code\renderer\command\SkyBoxRenderCommand.cpp" />
     <ClCompile Include="code\renderer\command\SphereShaderCommand.cpp" />
     <ClCompile Include="code\renderer\command\SpriteRenderCommand.cpp" />
     <ClCompile Include="code\renderer\command\StringRenderCommand.cpp" />

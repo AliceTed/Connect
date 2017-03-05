@@ -40,4 +40,6 @@ private:
 	Rule m_rule;
 	ManagerPtr m_manager;
 	std::shared_ptr<CommandRecorder> m_recorder;
+
+	float m_time;
 };

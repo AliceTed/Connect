@@ -18,7 +18,7 @@ GScolor4 CastID::colorID2Color(COLOR_ID _id)
 		{1.0f,0.0f,0.0f,1.0f},
 		{ 0.0f,0.0f,1.0f,1.0f },
 		{0.0f,1.0f,0.0f,1.0f},
-		{ 1.0f,1.0f,1.0f,1.0f}
+		{ 0.7f,0.7f,0.7f,1.0f}
 	};
 	const unsigned int index = static_cast<unsigned int>(_id);
 	assert(LENGTH>index&&index >= 0);

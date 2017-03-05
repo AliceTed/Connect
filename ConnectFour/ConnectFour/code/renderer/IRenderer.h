@@ -11,6 +11,7 @@ struct SpriteRenderDesc;
 struct LookAtDesc;
 struct StringRenderDesc;
 struct SphereShaderDesc;
+struct SkyBoxRenderDesc;
 class IRenderer
 {
 public:
@@ -30,7 +31,8 @@ public:
 	virtual void draw(const StringRenderDesc& _desc) = 0;
 	//スフィアシェーダ描画
 	virtual void draw(const SphereShaderDesc& _desc) = 0;
-
+	//スカイボックス描画(shader)
+	virtual void draw(const SkyBoxRenderDesc& _desc) = 0;
 	//同期を取る
 	virtual void sync() = 0;
 };

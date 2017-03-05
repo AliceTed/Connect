@@ -16,11 +16,15 @@
 #include "../renderer/IRenderer.h"
 #include "../control/ControllerManager.h"
 #include "../renderer/desc/LookAtDesc.h"
+#include "../renderer/desc/SkyBoxRenderDesc.h"
+#include "../id/CastID.h"
+#include "../id/MESH_ID.h"
 PlayControl::PlayControl()
 	:m_desk(std::make_shared<Desk>()),
 	m_manager(std::make_shared<ControllerManager>()),
 	m_rule(),
-	m_recorder(std::make_shared<CommandRecorder>())
+	m_recorder(std::make_shared<CommandRecorder>()),
+	m_time(0.0f)
 {
 	m_desk->reset();
 	m_manager->initialize();
@@ -41,17 +45,25 @@ void PlayControl::update(float deltaTime, bool _isStop)
 	m_desk->update(deltaTime);
 	if (_isStop)return;
 	m_manager->update(deltaTime, m_rule);
+	m_time += deltaTime;
 }
 
 void PlayControl::draw(IRenderer * _renderer) const
 {
-	const float half = MAP_SIZE*PIECE_SIZE*0.5;
+	const float size = MAP_SIZE*PIECE_SIZE;
+	const float half = size*0.5f-(PIECE_SIZE*0.5f);
 	LookAtDesc lookat;
-	lookat.eye = { half,half,20 };
+	lookat.eye = { half,half,size*1.5f};
 	lookat.at = { half,half,0 };
 	_renderer->lookAt(lookat);
+
+	SkyBoxRenderDesc skybox;
+	skybox.meshID = CastID::id2uint(MESH_ID::SKYDOME);
+	//skybox.time = m_time;
+	_renderer->draw(skybox);
+
 	m_desk->draw(_renderer);
-	m_manager->draw(_renderer);
+	m_manager->draw(_renderer);	
 }
 
 void PlayControl::addPlayer(CONTROLLER_ID _id)

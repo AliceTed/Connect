@@ -6,6 +6,7 @@
 #include "command\SpriteRenderCommand.h"
 #include "command\StringRenderCommand.h"
 #include "command\SphereShaderCommand.h"
+#include "command\SkyBoxRenderCommand.h"
 Renderer::Renderer()
 	:m_currentDisplay(0),
 	m_isRendering(false),
@@ -60,6 +61,11 @@ void Renderer::draw(const SphereShaderDesc & _desc)
 {
 	drawTemplate<SphereShaderCommand>(_desc);
 }
+void Renderer::draw(const SkyBoxRenderDesc & _desc)
+{
+	drawTemplate<SkyBoxRenderCommand>(_desc);
+}
+
 
 void Renderer::sync()
 {
@@ -105,3 +111,4 @@ void Renderer::wait(const bool& _isWait) const
 {
 	while (_isWait)Sleep(0);
 }
+

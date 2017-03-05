@@ -32,6 +32,8 @@ public:
 
 	//スフィアシェーダ描画
 	virtual void draw(const SphereShaderDesc & _desc) override;
+	//スカイボックス描画(shader)
+	virtual void draw(const SkyBoxRenderDesc & _desc) override;
 
 	//同期を取る
 	virtual void sync()override;

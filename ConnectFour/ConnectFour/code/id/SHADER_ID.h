@@ -10,5 +10,6 @@ enum class SHADER_ID:unsigned int
 	SPHERE,
 	BRIGHT,
 	BLOOM_BLUR,
-	BLOOM
+	BLOOM,
+	SKYBOX
 };

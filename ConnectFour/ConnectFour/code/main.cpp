@@ -28,21 +28,23 @@ private:
 		DataManager::load(TextureLoadDesc(TEXTURE_ID::ROCKWALL, "rockwall"));
 		DataManager::load(TextureLoadDesc(TEXTURE_ID::ROCKWALL_NORMAL, "rockwall_normal"));
 		DataManager::load(TextureLoadDesc(TEXTURE_ID::ROCKWALL_MASK, "rockwall_mask"));
-		
-		DataManager::load(MeshLoadDesc(MESH_ID::SPHERE, "sphere",true));
+		DataManager::load(TextureLoadDesc(TEXTURE_ID::SKYDOME, "skydome"));
+
+		DataManager::load(MeshLoadDesc(MESH_ID::SPHERE, "sphere", true));
 		DataManager::load(MeshLoadDesc(MESH_ID::SKYDOME, "skydome", true));
-		
+
 		//defalt.glslvはポストエフェクト用バーテックスシェーダー
 		DataManager::load(ShaderLoadDesc(SHADER_ID::SPHERE, "sphere"));
-		DataManager::load(ShaderLoadDesc(SHADER_ID::BRIGHT,"defalt","bright"));
+		DataManager::load(ShaderLoadDesc(SHADER_ID::BRIGHT, "defalt", "bright"));
 		DataManager::load(ShaderLoadDesc(SHADER_ID::BLOOM_BLUR, "defalt", "bloom_blur"));
 		DataManager::load(ShaderLoadDesc(SHADER_ID::BLOOM, "defalt", "bloom"));
+		DataManager::load(ShaderLoadDesc(SHADER_ID::SKYBOX, "defalt", "skybox"));
 
-		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE),800,600,GS_TRUE, GS_TRUE,GS_FALSE);
-		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BRIGHT),128,128, GS_TRUE, GS_TRUE, GS_FALSE);
+		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE), 800, 600, GS_TRUE, GS_TRUE, GS_FALSE);
+		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BRIGHT), 128, 128, GS_TRUE, GS_TRUE, GS_FALSE);
 		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM_BLUR), 128, 128, GS_TRUE, GS_TRUE, GS_FALSE);
 		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM), 800, 600, GS_TRUE, GS_TRUE, GS_FALSE);
-		
+
 		m_gameTread = std::make_unique<MyGameThread>(&m_renderer);
 		m_gameTread->start();
 
@@ -66,8 +68,8 @@ private:
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		 // レンダリングを行う
-		 m_renderer.render();
+		// レンダリングを行う
+		m_renderer.render();
 
 		gsEndRenderTarget();
 
@@ -92,7 +94,7 @@ private:
 		glActiveTexture(GL_TEXTURE0);
 		gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BRIGHT), 0);
 		gsSetShaderParamTexture("u_sceneColor", 0);
-		gsSetShaderParam2f("u_direction", &GSvector2(1,0.0f));
+		gsSetShaderParam2f("u_direction", &GSvector2(1, 0.0f));
 		gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
 		gsEndShader();
 		gsEndRenderTarget();

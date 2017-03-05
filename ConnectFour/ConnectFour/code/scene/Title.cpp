@@ -39,7 +39,8 @@ void Title::draw(IRenderer * renderer)
 	m_palyControl->draw(renderer);
 
 	static StringRenderDesc desc;
-	desc.position = GSvector2(300, 200);
+	//desc.color.rgb = GSvector3(0, 0,0);
+	desc.position = GSvector2(600, 500);
 	desc.font.size = 50;
 	desc.font.name = "ƒƒCƒŠƒI";
 	desc.string = "Replay";
@@ -50,13 +51,13 @@ void Title::draw(IRenderer * renderer)
 	desc.color.a += m_toggle;
 	renderer->draw(desc);
 
-	desc.position = GSvector2(220, 250);
+	desc.position = GSvector2(520, 450);
 	desc.string = "Push Space Key";
 	renderer->draw(desc);
 
 	SpriteRenderDesc sprite;
 	sprite.textureID = static_cast<unsigned int>(TEXTURE_ID::TITLE_ROGO);
-	sprite.matrix.translate(GSvector3(50, 50, 0));
+	sprite.matrix.translate(GSvector3(80, 50, 0));
 	renderer->draw(sprite);
 }
 

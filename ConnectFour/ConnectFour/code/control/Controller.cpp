@@ -29,7 +29,7 @@ void Controller::update(float deltaTime)
 }
 void Controller::draw(IRenderer * _renderer) const
 {
-	m_target->draw(_renderer,m_target->isMove()? 1.0f:0.5f);
+	m_target->draw(_renderer,m_target->isMove()? 1.0f:0.8f);
 }
 
 void Controller::start()
