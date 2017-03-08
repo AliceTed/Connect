@@ -151,7 +151,10 @@
     <ClCompile Include="code\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="code\DepthRenderDesc.h" />
     <ClInclude Include="code\ID.h" />
+    <ClInclude Include="code\LightDesc.h" />
+    <ClInclude Include="code\RenderDesc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,7 +4,7 @@ layout(location = 0) out vec4 out_FragColor;
 uniform float u_depthOffset;
 
 const float near = 0.1;
-const float far  = 100.0;
+const float far  = 30.0;
 const float linerDepth = 1.0 / (far - near);
 
 vec4 convRGBA(float depth)

@@ -4,7 +4,7 @@ in vec3 out_View;
 in vec3 out_Light;
 
 layout(location = 0) out vec4 out_FragColor;
-
+layout(location = 1) out float out_Depth;
 uniform vec4 u_lightAmbient;
 uniform vec4 u_lightDiffuse;
 uniform vec4 u_lightSpecular;
@@ -33,4 +33,5 @@ void main(void)
 	           + gs_MaterialEmission * baseColor;
 	color.a = baseColor.a * gs_MaterialDiffuse.a;
 	out_FragColor = color;
+	out_Depth=color.r;//gl_FragCoord.z;
 }
