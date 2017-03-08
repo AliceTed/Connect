@@ -14,7 +14,7 @@ class MyGame : public gslib::Game
 {
 public:
 	MyGame()
-		:Game(1280, 720, true),
+		:Game(1280, 720, false),
 		m_renderer(),
 		m_gameTread(nullptr),
 		m_minBright(0.4f),
