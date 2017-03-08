@@ -57,7 +57,7 @@ void Title::draw(IRenderer * renderer)
 
 	SpriteRenderDesc sprite;
 	sprite.textureID = static_cast<unsigned int>(TEXTURE_ID::TITLE_ROGO);
-	sprite.matrix.translate(GSvector3(80, 50, 0));
+	sprite.matrix.translate(GSvector3(330, 50, 0));
 	renderer->draw(sprite);
 }
 

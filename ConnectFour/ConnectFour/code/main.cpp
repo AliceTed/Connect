@@ -14,7 +14,7 @@ class MyGame : public gslib::Game
 {
 public:
 	MyGame()
-		:Game(800, 600),
+		:Game(1280, 720, true),
 		m_renderer(),
 		m_gameTread(nullptr),
 		m_minBright(0.4f),
@@ -44,11 +44,11 @@ private:
 		DataManager::load(ShaderLoadDesc(SHADER_ID::SKYBOX, "defalt", "skybox"));
 		DataManager::load(ShaderLoadDesc(SHADER_ID::RADIAL_BLUR, "defalt", "radialBlur"));
 
-		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE), 800, 600, GS_TRUE, GS_TRUE, GS_FALSE);
+		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE), 1280, 720, GS_TRUE, GS_TRUE, GS_FALSE);
 		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BRIGHT), 128, 128, GS_TRUE, GS_FALSE, GS_FALSE);
 		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM_BLUR), 128, 128, GS_TRUE, GS_FALSE, GS_FALSE);
-		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM), 800, 600, GS_TRUE, GS_FALSE, GS_FALSE);
-		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::RADIAL_BLUR), 800, 600, GS_TRUE, GS_FALSE, GS_FALSE);
+		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM), 1280, 720, GS_TRUE, GS_FALSE, GS_FALSE);
+		gsCreateRenderTarget(CastID::id2uint(RENDER_TARGET_ID::RADIAL_BLUR), 1280, 720, GS_TRUE, GS_FALSE, GS_FALSE);
 
 
 		m_gameTread = std::make_unique<MyGameThread>(&m_renderer);
