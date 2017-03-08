@@ -4,6 +4,7 @@
 #include "../../renderer/desc/SphereShaderDesc.h"
 #include "../../id/MESH_ID.h"
 #include "../desk/DeskDefine.h"
+#include "../../util/Math.h"
 Piece::Piece(const GSvector3& _position,COLOR_ID _id)
 	:m_position(_position),
 	m_color(_id),
@@ -23,7 +24,7 @@ Piece::~Piece()
 }
 void Piece::update(float deltaTime)
 {
-	m_rotateY += deltaTime*m_rotSpeed;
+	m_rotateY =Math::wrap(m_rotateY+deltaTime*m_rotSpeed,0.0f,360.0f);
 }
 void Piece::draw(IRenderer * _renderer, float _alpha) const
 {
@@ -33,9 +34,11 @@ void Piece::draw(IRenderer * _renderer, float _alpha) const
 	desc.matrix.rotateY(m_rotateY);
 	desc.matrix.scale(GSvector3(radius, radius, radius));	
 	desc.matrix.translate(m_position);
-	desc.color = CastID::colorID2Color(m_color);
+	desc.color =CastID::colorID2Color(m_color);
 	desc.color.a = _alpha;
 	desc.light.position = m_position;
+	desc.time = m_rotateY*0.1f;
+	desc.isWave = m_isConnect;
 	_renderer->draw(desc);
 }
 

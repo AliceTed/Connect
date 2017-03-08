@@ -37,6 +37,9 @@ void SphereShaderCommand::render()
 	gsBindTexture(CastID::id2uint(TEXTURE_ID::ROCKWALL_MASK));
 
 	gsSetShaderParam4f("u_color", &m_desc.color);
+
+	gsSetShaderParam1f("u_time", m_desc.time);
+	gsSetShaderParam1f("u_isWave", m_desc.isWave);
 	gsDrawMeshEx(m_desc.meshID);
 	gsEndShader();
 

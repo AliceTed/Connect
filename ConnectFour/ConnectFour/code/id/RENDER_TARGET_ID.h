@@ -10,5 +10,6 @@ enum class RENDER_TARGET_ID:unsigned int
 	BASE,
 	BRIGHT,
 	BLOOM_BLUR,
-	BLOOM
+	BLOOM,
+	RADIAL_BLUR
 };

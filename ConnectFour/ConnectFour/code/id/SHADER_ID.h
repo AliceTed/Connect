@@ -11,5 +11,6 @@ enum class SHADER_ID:unsigned int
 	BRIGHT,
 	BLOOM_BLUR,
 	BLOOM,
-	SKYBOX
+	SKYBOX,
+	RADIAL_BLUR
 };

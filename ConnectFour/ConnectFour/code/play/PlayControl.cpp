@@ -118,7 +118,7 @@ bool PlayControl::isFinish() const
 
 bool PlayControl::isWin() const
 {
-	return m_manager->isFinish();
+	return m_manager->isFinish()&&gsGetKeyTrigger(GKEY_SPACE);
 }
 
 CONTROLLER_ID PlayControl::getWinner() const

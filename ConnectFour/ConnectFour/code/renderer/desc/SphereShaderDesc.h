@@ -12,7 +12,9 @@ struct SphereShaderDesc
 	SphereShaderDesc()
 		:meshID(0),
 		color(1.0f, 1.0f, 1.0f, 1.0f),
-		light()
+		light(),
+		isWave(false),
+		time(0)
 	{
 		matrix.identity();
 	}
@@ -20,4 +22,6 @@ struct SphereShaderDesc
 	GSmatrix4 matrix;
 	GScolor color;
 	LightDesc light;
+	bool isWave;
+	float time;
 };
