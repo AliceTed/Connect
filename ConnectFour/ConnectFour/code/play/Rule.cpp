@@ -1,9 +1,10 @@
 #include "Rule.h"
+#include <cassert>
 #include "piece/Piece.h"
 #include "../id/CastID.h"
 #include "../util/IntVector2.h"
 
-bool Rule::isWin(const Container & _container, const IntVector2& _location, CONTROLLER_ID _id)const
+bool Rule::isWin( Container & _container, const IntVector2& _location, CONTROLLER_ID _id)const
 {
 	const IntVector2 dir[] =
 	{
@@ -37,15 +38,25 @@ bool Rule::isInSide(const IntVector2 & _location) const
 	return true;
 }
 
-bool Rule::check(const Container & _container, const IntVector2 & _location, const IntVector2 & _dir, COLOR_ID _id, bool isNextCheck)const
+bool Rule::check(Container & _container, const IntVector2 & _location, const IntVector2 & _dir, COLOR_ID _id, bool isNextCheck)const
 {
+	std::vector<IntVector2> connects;
 	for (int i = 0; i < ARRANGE_SIZE; i++)
 	{
 		IntVector2 loc = _location + (_dir*i);
 		if (!isInSide(loc))return false;
 		if (!_container[loc.x][loc.y]->isSameType(_id))return false;
+		connects.emplace_back(loc);
 		if (!isNextCheck)continue;
 		if (check(_container, loc, _dir*-1, _id))return true;
 	}
+
+	//Œq‚ª‚Á‚Ä‚¢‹î‚ð“K—p
+	assert(connects.size() == ARRANGE_SIZE);
+	for (const auto& i:connects)
+	{
+		_container[i.x][i.y]->connect();
+	}
+
 	return true;
 }

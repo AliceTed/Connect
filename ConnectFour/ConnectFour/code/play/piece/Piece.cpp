@@ -8,7 +8,8 @@ Piece::Piece(const GSvector3& _position,COLOR_ID _id)
 	:m_position(_position),
 	m_color(_id),
 	m_rotateY(0.0f),
-	m_rotSpeed(0.2f)
+	m_rotSpeed(0.2f),
+	m_isConnect(false)
 {
 }
 
@@ -41,4 +42,9 @@ void Piece::draw(IRenderer * _renderer, float _alpha) const
 bool Piece::isSameType(COLOR_ID _id) const
 {
 	return m_color==_id;
+}
+
+void Piece::connect()
+{
+	m_isConnect = true;
 }

@@ -20,10 +20,13 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw(IRenderer* _renderer,float _alpha=1.0f)const;
 	bool isSameType(COLOR_ID _id)const;
+
+	void connect();
 protected:
 	GSvector3 m_position;
 private:
 	COLOR_ID m_color;
 	float m_rotateY;
 	float m_rotSpeed;
+	bool m_isConnect;
 };

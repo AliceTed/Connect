@@ -15,7 +15,7 @@ public:
 	Desk();
 	virtual ~Desk()override;
 	virtual bool isFinish() const override;
-	virtual bool isWin(const Rule & _rule,const IntVector2& _location,CONTROLLER_ID _id) const override;
+	virtual bool isWin(const Rule & _rule,const IntVector2& _location,CONTROLLER_ID _id)  override;
 	virtual void accept(IDeskVisitor * _visitor) const override;
 	
 	virtual std::vector<IntVector2> getFreeLoactions() const override;

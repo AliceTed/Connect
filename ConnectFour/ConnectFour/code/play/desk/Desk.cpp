@@ -31,7 +31,7 @@ bool Desk::isFinish() const
 	return true;
 }
 
-bool Desk::isWin(const Rule & _rule, const IntVector2& _location,CONTROLLER_ID _id) const
+bool Desk::isWin(const Rule & _rule, const IntVector2& _location,CONTROLLER_ID _id) 
 {
 	return _rule.isWin(m_conatainer,_location,_id);
 }

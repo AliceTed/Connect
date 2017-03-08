@@ -16,7 +16,7 @@ class IDeskMediator
 public:
 	virtual ~IDeskMediator(){}
 	virtual bool isFinish()const = 0;
-	virtual bool isWin(const Rule& _rule,const IntVector2& _location,CONTROLLER_ID _id)const = 0;
+	virtual bool isWin(const Rule& _rule,const IntVector2& _location,CONTROLLER_ID _id) = 0;
 	virtual void accept(IDeskVisitor* _visitor)const=0;
 	virtual void placePiece(const IntVector2& _location, CONTROLLER_ID _id)=0;
 
