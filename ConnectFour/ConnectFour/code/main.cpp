@@ -72,90 +72,90 @@ private:
 		//レンダーターゲットをクラス化
 
 		//baseのフレームバッファに書き込む
-		gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
+		/*gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
 		glClearColor(0, 0, 0, 1);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);*/
 
 		// レンダリングを行う
 		m_renderer.render();
 
-		gsEndRenderTarget();
+		//gsEndRenderTarget();
 
-		//光度抽出 brightに書き込む
-		gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BRIGHT));
-		glClearColor(0, 0, 0, 1);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		gsBeginShader(CastID::id2uint(SHADER_ID::BRIGHT));
-		glActiveTexture(GL_TEXTURE0);
-		gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BASE), 0);
-		gsSetShaderParamTexture("u_sceneColor", 0);
-		gsSetShaderParam1f("u_minBright", m_minBright);
-		gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
-		gsEndShader();
-		gsEndRenderTarget();
+		////光度抽出 brightに書き込む
+		//gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BRIGHT));
+		//glClearColor(0, 0, 0, 1);
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//gsBeginShader(CastID::id2uint(SHADER_ID::BRIGHT));
+		//glActiveTexture(GL_TEXTURE0);
+		//gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BASE), 0);
+		//gsSetShaderParamTexture("u_sceneColor", 0);
+		//gsSetShaderParam1f("u_minBright", m_minBright);
+		//gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
+		//gsEndShader();
+		//gsEndRenderTarget();
 
-		//抽出した光度にブラーをかける　
-		gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM_BLUR));
-		glClearColor(0, 0, 0, 1);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		gsBeginShader(CastID::id2uint(SHADER_ID::BLOOM_BLUR));
-		glActiveTexture(GL_TEXTURE0);
-		gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BRIGHT), 0);
-		gsSetShaderParamTexture("u_sceneColor", 0);
-		gsSetShaderParam2f("u_direction", &GSvector2(1, 0.0f));
-		gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
-		gsEndShader();
-		gsEndRenderTarget();
+		////抽出した光度にブラーをかける　
+		//gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM_BLUR));
+		//glClearColor(0, 0, 0, 1);
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//gsBeginShader(CastID::id2uint(SHADER_ID::BLOOM_BLUR));
+		//glActiveTexture(GL_TEXTURE0);
+		//gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BRIGHT), 0);
+		//gsSetShaderParamTexture("u_sceneColor", 0);
+		//gsSetShaderParam2f("u_direction", &GSvector2(1, 0.0f));
+		//gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
+		//gsEndShader();
+		//gsEndRenderTarget();
 
-		//デフォルトとブラーをかけたものを合成
-		gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM));
-		glClearColor(0, 0, 0, 1);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		gsBeginShader(CastID::id2uint(SHADER_ID::BLOOM));
-		glActiveTexture(GL_TEXTURE0);
-		gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BASE), 0);
-		glActiveTexture(GL_TEXTURE1);
-		gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BLOOM_BLUR), 0);
-		gsSetShaderParamTexture("u_sceneColor", 0);
-		gsSetShaderParamTexture("u_bloomColor", 1);
-		gsSetShaderParam1f("u_toneScale", m_toneScale);
-		gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
-		gsEndShader();
-		gsEndRenderTarget();
+		////デフォルトとブラーをかけたものを合成
+		//gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BLOOM));
+		//glClearColor(0, 0, 0, 1);
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//gsBeginShader(CastID::id2uint(SHADER_ID::BLOOM));
+		//glActiveTexture(GL_TEXTURE0);
+		//gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BASE), 0);
+		//glActiveTexture(GL_TEXTURE1);
+		//gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BLOOM_BLUR), 0);
+		//gsSetShaderParamTexture("u_sceneColor", 0);
+		//gsSetShaderParamTexture("u_bloomColor", 1);
+		//gsSetShaderParam1f("u_toneScale", m_toneScale);
+		//gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
+		//gsEndShader();
+		//gsEndRenderTarget();
 
-		gsUnindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BLOOM_BLUR), 0);
-
-
-		//RadialBlur
-		gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::RADIAL_BLUR));
-		glClearColor(0, 0, 0, 1);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		gsBeginShader(CastID::id2uint(SHADER_ID::RADIAL_BLUR));
-		glActiveTexture(GL_TEXTURE0);
-		gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BLOOM), 0);
-		gsSetShaderParamTexture("u_sceneColor", 0);
-		glActiveTexture(GL_TEXTURE1);
-		gsBindTexture(CastID::id2uint(TEXTURE_ID::CIRCLE_MASK));
-		gsSetShaderParamTexture("u_mask", 1);		
-
-		gsSetShaderParam1f("u_blurAmount", 0.4f);
-		/*gsSetShaderParam2f("u_screenMult", &GSvector2(1.0f, 1.0f));
-		gsSetShaderParam2f("u_center", &GSvector2(0.5f,0.5f));*/
-
-		gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
-		gsEndShader();
-		gsEndRenderTarget();
-		gsUnbindTexture(CastID::id2uint(TEXTURE_ID::CIRCLE_MASK));
-		glActiveTexture(GL_TEXTURE0);
-		gsUnindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::RADIAL_BLUR), 0);
+		//gsUnindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BLOOM_BLUR), 0);
 
 
-		GSuint bloom = CastID::id2uint(RENDER_TARGET_ID::RADIAL_BLUR);
-		glActiveTexture(GL_TEXTURE0);
-		gsBindRenderTargetTexture(bloom, 0);
-		gsDrawRenderTarget(bloom);
-		gsUnindRenderTargetTexture(bloom, 0);
+		////RadialBlur
+		//gsBeginRenderTarget(CastID::id2uint(RENDER_TARGET_ID::RADIAL_BLUR));
+		//glClearColor(0, 0, 0, 1);
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		//gsBeginShader(CastID::id2uint(SHADER_ID::RADIAL_BLUR));
+		//glActiveTexture(GL_TEXTURE0);
+		//gsBindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::BLOOM), 0);
+		//gsSetShaderParamTexture("u_sceneColor", 0);
+		//glActiveTexture(GL_TEXTURE1);
+		//gsBindTexture(CastID::id2uint(TEXTURE_ID::CIRCLE_MASK));
+		//gsSetShaderParamTexture("u_mask", 1);		
+
+		//gsSetShaderParam1f("u_blurAmount", 0.4f);
+		///*gsSetShaderParam2f("u_screenMult", &GSvector2(1.0f, 1.0f));
+		//gsSetShaderParam2f("u_center", &GSvector2(0.5f,0.5f));*/
+
+		//gsDrawRenderTarget(CastID::id2uint(RENDER_TARGET_ID::BASE));
+		//gsEndShader();
+		//gsEndRenderTarget();
+		//gsUnbindTexture(CastID::id2uint(TEXTURE_ID::CIRCLE_MASK));
+		//glActiveTexture(GL_TEXTURE0);
+		//gsUnindRenderTargetTexture(CastID::id2uint(RENDER_TARGET_ID::RADIAL_BLUR), 0);
+
+
+		//GSuint bloom = CastID::id2uint(RENDER_TARGET_ID::RADIAL_BLUR);
+		//glActiveTexture(GL_TEXTURE0);
+		//gsBindRenderTargetTexture(bloom, 0);
+		//gsDrawRenderTarget(bloom);
+		//gsUnindRenderTargetTexture(bloom, 0);
 
 	}
 	// 描画
