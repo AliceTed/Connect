@@ -25,6 +25,7 @@ public:
 	virtual IntVector2 getFreeSpaceColumn(unsigned int _column)const = 0;
 	virtual bool isFreeLocation(const IntVector2& _location)const=0;
 	virtual bool isSamePiece(const IntVector2& _location,CONTROLLER_ID _id)const=0;
+	virtual bool isInSide(const IntVector2& _loction)const=0;
 
 	virtual void push_back()=0;
 	virtual void pop_back()=0;

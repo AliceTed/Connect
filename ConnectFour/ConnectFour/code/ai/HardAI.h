@@ -19,8 +19,6 @@ public:
 	HardAI(std::weak_ptr<IDeskMediator> _desk, std::weak_ptr<PlaceTarget> _target ,std::weak_ptr<ControllerManager>_manager);
 	virtual ACTION think() override;
 private:
-
-	bool isInSide(const IntVector2& _loc)const;
 	int min_max(IDeskMediator* _desk,CONTROLLER_ID _id, int depth);
 	//Œ»ó‚Ì‹Ç–Ê‚ğŒ©‚Ä•]‰¿‚ğ•t‚¯‚é(‘S”Õ–Ê‚Ì‘‡•]‰¿)
 	int eval(const IDeskMediator* _desk, CONTROLLER_ID _id)const;

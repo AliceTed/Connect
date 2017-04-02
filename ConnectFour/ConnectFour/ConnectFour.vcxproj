@@ -130,7 +130,6 @@
     <ClCompile Include="code\id\CastID.cpp" />
     <ClCompile Include="code\main.cpp" />
     <ClCompile Include="code\play\desk\Desk.cpp" />
-    <ClCompile Include="code\play\desk\IDeskMediator.cpp" />
     <ClCompile Include="code\play\piece\GraduallyMove.cpp" />
     <ClCompile Include="code\play\piece\InstantlyMove.cpp" />
     <ClCompile Include="code\play\piece\MovePiece.cpp" />

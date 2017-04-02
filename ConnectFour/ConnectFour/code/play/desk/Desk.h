@@ -51,7 +51,12 @@ public:
 	void draw(IRenderer* _renderer)const;
 	virtual bool isSamePiece(const IntVector2 & _location, CONTROLLER_ID _id) const override;
 
+	//
+	virtual bool isInSide(const IntVector2 & _loction) const override;
+
+	//‘Þ”ð
 	virtual void push_back() override;
+	//
 	virtual void pop_back() override;
 private:
 	

@@ -32,4 +32,6 @@ private:
 	Controller* m_current;
 	unsigned int m_currentIndex;
 	bool m_isFinish;
+
+	int tmpCount;
 };

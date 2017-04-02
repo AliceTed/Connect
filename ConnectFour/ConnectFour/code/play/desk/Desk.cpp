@@ -127,6 +127,15 @@ void Desk::make_piece()
 	}
 }
 
+bool Desk::isInSide(const IntVector2 & _loction) const
+{
+	if (MAP_SIZE <= _loction.x)return false;
+	if (_loction.x < 0)return false;
+	if (MAP_SIZE <= _loction.y)return false;
+	if (_loction.y < 0)return false;
+	return true;
+}
+
 std::vector<IntVector2> Desk::getFreeLoactions() const
 {
 	std::vector<IntVector2> res;
