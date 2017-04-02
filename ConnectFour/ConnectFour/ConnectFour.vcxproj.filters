@@ -404,9 +404,6 @@
     <ClCompile Include="code\thread\LoadThread.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="code\play\desk\IDeskMediator.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="code\gamethread\GameThread.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>

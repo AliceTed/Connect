@@ -6,6 +6,7 @@
 ControllerManager::ControllerManager()
 	:m_container(),
 	m_current(nullptr),
+	m_currentIndex(0U),
 	m_isFinish(false)
 {
 }
@@ -18,6 +19,7 @@ ControllerManager::~ControllerManager()
 void ControllerManager::initialize()
 {
 	m_container.clear();
+	m_currentIndex = 0U;
 	m_current = nullptr;
 	m_isFinish=false;
 }
@@ -30,7 +32,8 @@ void ControllerManager::add(ControllerPtr _controller)
 void ControllerManager::start()
 {
 	m_isFinish =false;
-	change(*m_container.begin());
+	m_currentIndex = 0U;
+	change(getCurrentController());
 }
 
 void ControllerManager::update(float deltaTime, const Rule& _rule)
@@ -71,18 +74,20 @@ std::vector<CONTROLLER_ID> ControllerManager::getActiveID() const
 void ControllerManager::next()
 {
 	if (m_isFinish)return;
-	auto itr=std::find_if(m_container.begin(), m_container.end(), [=](ControllerPtr& _c) {return _c.get() == m_current;});
-	assert(itr != m_container.end());
-	itr++;
-	if (itr == m_container.end())
-	{
-		itr = m_container.begin();
-	}
-	change(*itr);
+	const unsigned int size = m_container.size();
+	m_currentIndex = Math::wrap(m_currentIndex + 1, 0U, size);
+	change(getCurrentController());
 }
-void ControllerManager::change(ControllerPtr _next)
+void ControllerManager::change(Controller* _next)
 {
 	m_current = nullptr;
-	m_current = _next.get();
+	m_current = _next;
 	m_current->start();
+}
+
+Controller * ControllerManager::getCurrentController() const
+{
+	assert(m_currentIndex < m_container.size());
+	assert(m_currentIndex>=0);
+	return m_container.at(m_currentIndex).get();
 }

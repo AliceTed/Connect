@@ -24,10 +24,14 @@ public:
 	std::vector<CONTROLLER_ID> getActiveID()const;
 private:
 	void next();
-	void change(ControllerPtr _next);
+	void change(Controller* _next);
+	Controller* getCurrentController()const;
 private:
 	using Container = std::vector<ControllerPtr>;
 	Container m_container;
 	Controller* m_current;
+	unsigned int m_currentIndex;
 	bool m_isFinish;
+
+	int tmpCount;
 };

@@ -34,16 +34,6 @@ ACTION HardAI::think()
 	min_max(desk.get(), target->getControllerID(), 3);
 	return ACTION::NOTHING;
 }
-
-bool HardAI::isInSide(const IntVector2 & _loc) const
-{
-	if (MAP_SIZE <= _loc.x)return false;
-	if (_loc.x < 0)return false;
-	if (MAP_SIZE <= _loc.y)return false;
-	if (_loc.y < 0)return false;
-	return true;
-}
-
 int HardAI::min_max(IDeskMediator * _desk, CONTROLLER_ID _id, int depth)
 {
 	/* —t‚Ìê‡A•]‰¿’l‚ð•Ô‚· */
@@ -130,7 +120,7 @@ int HardAI::eval_dir(const IDeskMediator * _desk, const IntVector2 & _location, 
 	for (int i = 0; i < ARRANGE_SIZE; i++)
 	{
 		IntVector2 loc = _location + (_dir*i);
-		if (!isInSide(loc))break;
+		if (!_desk->isInSide(loc))break;
 		if (_desk->isFreeLocation(loc))continue;
 
 		if (_desk->isSamePiece(loc, _id))
